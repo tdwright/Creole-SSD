@@ -18,6 +18,7 @@ namespace CreoleSSD
 
         VideoCaptureDevice videoSource;
         Rectangle ROI;
+        Audio audioOutput;
 
         public Main()
         {
@@ -38,6 +39,8 @@ namespace CreoleSSD
             this.videoSource.DesiredFrameRate = 10;
             // set NewFrame event handler
             this.videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+            // initialise the audio output
+            this.audioOutput = new Audio();
             // start the video source
             this.videoSource.Start();
         }
@@ -163,6 +166,8 @@ namespace CreoleSSD
                 {
                     this.ROIbox.Image = sub;
                 }));
+
+            this.audioOutput.SetLevels(weightedValues);
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
